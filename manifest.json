@@ -1,0 +1,22 @@
+{
+    "manifest_version": 2,
+
+    "name": "MarkScrape",
+    "description": "This extension extracts data from a page and stores it tab delimited in clipboard",
+    "version": "1.0",
+
+    "background": {
+        "scripts": ["background.js"]
+    },
+
+    "content_scripts": [{
+        "matches": ["https://www.airbnb.com/reservation/*"],
+        "js": ["jquery.js",
+            "content.js"]
+    }],
+    "browser_action": {
+        "default_title": "Test Extension"
+    },
+
+    "permissions": ["activeTab"]
+}
