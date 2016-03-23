@@ -37,3 +37,10 @@ is a generated field I use for spreadsheet manipulation to do monthly metrics.
 
 I open a spreadsheet with the fields above as a header.  I go to my transaction history.  I command click reservations opening them in new tabs and loading the clipboard.  I go to spreadsheet.  I paste in a new row from clipboard.  I close opened reservation tab.  I command click a new reservation and continue.
 
+##Development Tips
+
+This technology is not in my wheelhouse, so if I ever need to make updates these lessons will be helpful reminders to me.  Ignore if expert already.
+
+- cmd-option-I opens dev tools window
+- in console, $$('whatever') will make matches, . is for class name
+- when making changes to extension code you have to go to Extensions window and hit cmd-R to refresh
