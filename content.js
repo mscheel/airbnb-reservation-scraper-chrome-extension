@@ -1,29 +1,27 @@
 var clean = false;
-var els = $('.receipt-label')
-for(i = 0; i < els.length; i++) {
-    if(els[i].innerHTML.indexOf("Cleaning Fees") > -1) {
-        clean = true;
-    }
+if($('td.payout-table-cell-left')[1].innerText.indexOf("Cleaning Fees") > -1) {
+        clean = true; 
 }
 
-var checkInDate = eval("$('.h4')[0]").innerText;
+var checkInDate = eval($('div.col-3').children('span')[0]).innerText
 var checkInMonthYear = ((new Date(checkInDate)).getMonth() + 1) + "" + ((new Date(checkInDate)).getYear() + 1900);
-var checkOutDate = eval("$('.h4')[1]").innerText;
-var nights = eval("$('.h4')[2]").innerText;
-var guests = eval("$('.h4')[3]").innerText;
+var checkOutDate = eval($('div.col-3').children('span')[2]).innerText
+var regExNumberAtStart = new RegExp("\\d+");
+var nights = regExNumberAtStart.exec(eval($('div.col-4.hide-overflow').children('span')[0]).innerText);
+var guests = regExNumberAtStart.exec(eval($('div.cotraveler-section-header.space-2.hide-overflow')[0]).innerText);
 
 var regExPrice = new RegExp("\\$[0-9]+");
-var nightlyPayout = regExPrice.exec($('.receipt-label')[0].innerHTML);
+var nightlyPayout = regExPrice.exec($('td.payout-table-cell-left')[0].innerHTML);
 
-var payout = regExPrice.exec($('.receipt-amount')[0].innerHTML);
+var payout = regExPrice.exec($('td.payout-table-cell-right')[0].innerHTML);
 if(clean) {
-    var cleaningFee = regExPrice.exec($('.receipt-amount')[1].innerHTML);
-    var creditCardFee = regExPrice.exec($('.receipt-amount')[2].innerHTML);
-    var totalPayout = regExPrice.exec($('.receipt-amount')[3].innerHTML);
+    var cleaningFee = regExPrice.exec($('td.payout-table-cell-right')[1].innerText);
+    var creditCardFee = regExPrice.exec($('td.payout-table-cell-right')[2].innerHTML);
+    var totalPayout = regExPrice.exec($('td.payout-table-cell-right')[3].innerHTML);
 } else {
     var cleaningFee = 0;
-    var creditCardFee = regExPrice.exec($('.receipt-amount')[1].innerHTML);
-    var totalPayout = regExPrice.exec($('.receipt-amount')[2].innerHTML);
+    var creditCardFee = regExPrice.exec($('td.payout-table-cell-right')[2].innerHTML);
+    var totalPayout = regExPrice.exec($('td.payout-table-cell-right')[3].innerHTML);
 }
 
 try {
@@ -31,13 +29,14 @@ try {
 } catch(err) {
     securityDeposit = 0;
 }
-var property = $('.col-6')[2].innerText.replace(/\n/g, " ");
-var guestName = $('.media-body a')[0].innerText;
-var regExConfirmationCode = new RegExp("Confirmation Code: ([^ ]+)");
-var confirmationCode = regExConfirmationCode.exec($('.col-6.col-top')[0].innerText)[1];
+var property = $('div.col-5.hide-overflow')[0].innerText.replace(/\n/g, " ");
+var regExGuestName = new RegExp("(.*)\\n");
+var guestName = regExGuestName.exec($('div.space-top-sm-4.space-top-lg-4')[0].innerText)[1];
+var confirmationCode = eval($('div.col-9.text-center-on-sm').children('span')[2]).innerText;
 var regExPhone = new RegExp("(\\+(.\+\\d\\d\\d\\d))");
+var phoneNumber = "";
 try {
-    var phoneNumber = regExPhone.exec($('div.media-body')[0].innerText)[2];
+    var phoneNumber = regExPhone.exec($('div.space-top-4')[2].innerText)[2];
 } catch(err) {
     phonenumber = "";
 }
@@ -60,4 +59,4 @@ function copy (val) {
         type: 'copy',
         text: val
     });
-}
+}      
