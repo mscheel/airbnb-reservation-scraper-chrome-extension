@@ -2,10 +2,10 @@ var clean = false;
 if($('td.payout-table-cell-left')[1].innerText.indexOf("Cleaning Fees") > -1) {
         clean = true; 
 }
-
-var checkInDate = eval($('div.col-3').children('span')[0]).innerText
+//TODO: Bug waiting to happen, uses computer current year, but what if booking in December for January of next year?
+var checkInDate = eval($('div.col-3').children('span')[0]).innerText + ", " + new Date().getFullYear();
 var checkInMonthYear = ((new Date(checkInDate)).getMonth() + 1) + "" + ((new Date(checkInDate)).getYear() + 1900);
-var checkOutDate = eval($('div.col-3').children('span')[2]).innerText
+var checkOutDate = eval($('div.col-3').children('span')[2]).innerText + ", " + new Date().getFullYear();
 var regExNumberAtStart = new RegExp("\\d+");
 var nights = regExNumberAtStart.exec(eval($('div.col-4.hide-overflow').children('span')[0]).innerText);
 var guests = regExNumberAtStart.exec(eval($('div.cotraveler-section-header.space-2.hide-overflow')[0]).innerText);
