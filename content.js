@@ -8,7 +8,7 @@ var checkInMonthYear = ((new Date(checkInDate)).getMonth() + 1) + "" + ((new Dat
 var checkOutDate = eval($('div.col-3').children('span')[2]).innerText + ", " + new Date().getFullYear();
 var regExNumberAtStart = new RegExp("\\d+");
 var nights = regExNumberAtStart.exec(eval($('div.col-4.hide-overflow').children('span')[0]).innerText);
-var guests = regExNumberAtStart.exec(eval($('div.cotraveler-section-header.space-2.hide-overflow')[0]).innerText);
+var guests = regExNumberAtStart.exec(eval($('div.col-md-9.col-md-push-3.col-lg-12.col-lg-push-0')[0]).innerText);
 
 var regExPrice = new RegExp("\\$[0-9]+");
 var nightlyPayout = regExPrice.exec($('td.payout-table-cell-left')[0].innerHTML);
