@@ -14,11 +14,11 @@ var regExPrice = new RegExp("\\$[0-9]+");
 var nightlyPayout = regExPrice.exec($('td.payout-table-cell-left')[0].innerHTML);
 
 var payout = regExPrice.exec($('td.payout-table-cell-right')[0].innerHTML);
-//June 21 - Cleaning fee is gone from page now, so this stuff is unreliable, should add in Airbnb service fee
+//June 21 - Cleaning fee is gone from page when special offer is made, possible bug
 if(clean) {
     var cleaningFee = regExPrice.exec($('td.payout-table-cell-right')[1].innerText);
     var creditCardFee = regExPrice.exec($('td.payout-table-cell-right')[2].innerHTML);
-    var totalPayout = regExPrice.exec($('td.payout-table-cell-right')[2].children[0].innerHTML);
+    var totalPayout = regExPrice.exec($('td.payout-table-cell-right')[3].children[0].innerHTML);
 } else {
     var cleaningFee = 0;
     var creditCardFee = regExPrice.exec($('td.payout-table-cell-right')[2].innerHTML);
