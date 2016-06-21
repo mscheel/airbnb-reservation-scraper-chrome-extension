@@ -3,7 +3,7 @@ if($('td.payout-table-cell-left')[1].innerText.indexOf("Cleaning Fees") > -1) {
         clean = true; 
 }
 //TODO: Bug waiting to happen, uses computer current year, but what if booking in December for January of next year?
-var checkInDate = eval($('div.col-3').children('span')[0]).innerText + ", " + new Date().getFullYear();
+var checkInDate = eval($('div.col-3')[2].children[0].innerText + ", " + new Date().getFullYear();
 var checkInMonthYear = ((new Date(checkInDate)).getMonth() + 1) + "" + ((new Date(checkInDate)).getYear() + 1900);
 var checkOutDate = eval($('div.col-3').children('span')[2]).innerText + ", " + new Date().getFullYear();
 var regExNumberAtStart = new RegExp("\\d+");
@@ -14,14 +14,15 @@ var regExPrice = new RegExp("\\$[0-9]+");
 var nightlyPayout = regExPrice.exec($('td.payout-table-cell-left')[0].innerHTML);
 
 var payout = regExPrice.exec($('td.payout-table-cell-right')[0].innerHTML);
+//June 21 - Cleaning fee is gone from page now, so this stuff is unreliable, should add in Airbnb service fee
 if(clean) {
     var cleaningFee = regExPrice.exec($('td.payout-table-cell-right')[1].innerText);
     var creditCardFee = regExPrice.exec($('td.payout-table-cell-right')[2].innerHTML);
-    var totalPayout = regExPrice.exec($('td.payout-table-cell-right')[3].innerHTML);
+    var totalPayout = regExPrice.exec($('td.payout-table-cell-right')[2].children[0].innerHTML);
 } else {
     var cleaningFee = 0;
     var creditCardFee = regExPrice.exec($('td.payout-table-cell-right')[2].innerHTML);
-    var totalPayout = regExPrice.exec($('td.payout-table-cell-right')[3].innerHTML);
+    var totalPayout = regExPrice.exec($('td.payout-table-cell-right')[2].children[0].innerHTML);
 }
 
 try {
